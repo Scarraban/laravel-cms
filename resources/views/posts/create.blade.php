@@ -7,5 +7,7 @@
   <textarea name="content"></textarea>
   <input type="submit" name="submit" />
 </form>
-
+@endsection
 @section('footer')
+
+@endsection
