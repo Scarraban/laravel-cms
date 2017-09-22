@@ -10,6 +10,11 @@
       </li>
     @endforeach
   </ul>
+  <a href="{{route('posts.create')}}">
+    <button className="btn btn-primary">
+      New Post
+    </button>
+  </a>
 @endsection
 @section('footer')
 

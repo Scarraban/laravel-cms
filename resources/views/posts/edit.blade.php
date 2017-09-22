@@ -1,13 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="/posts/{{$post->id}}">
-  {{ csrf_field() }}
-  <input name="_method" type="hidden" value="PUT" />
-  <input type="text" name="title" value="{{$post->title}}" placeholder="Enter title"/>
-  <textarea name="content">{{$post->content}}</textarea>
-  <input type="submit" name="submit" />
-</form>
+{!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PATCH']) !!}
+  <div class="form-group">
+    {!! Form::label('title', 'Title') !!}
+    {!! Form::text('title', null, ['class' => 'form-control']) !!}
+  </div>
+  <div class="form-group">
+    {!! Form::label('content', 'Content') !!}
+    {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+  </div>
+  <div class="form-group">
+    {!! Form::submit('Create Post', ['class' => 'btn btn-primary']) !!}
+  </div>
+{!! Form::close() !!}
 @endsection
 @section('footer')
 
