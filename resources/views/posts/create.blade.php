@@ -11,6 +11,17 @@
     {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
   </div>
   <div class="form-group">
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>
+              {{ $error }}
+            </li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
     {!! Form::submit('Create Post', ['class' => 'btn btn-primary']) !!}
   </div>
 {!! Form::close() !!}
