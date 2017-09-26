@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatePostRequest;
 use App\Post as Post;
 
 class PostsController extends Controller
@@ -14,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::alphabetical()->get();
         return view('posts.index', compact('posts'));
     }
 
@@ -34,14 +35,16 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
-        $request->validate([
-          'title' => 'required|unique:posts|max:255',
-          'content' => 'required'
-        ]);
+        // $file = $request->file('file');
 
         $input = $request->all();
+        if($file = $request->file('file')) {
+          $name = $file->getClientOriginalName();
+          $file->move('images', $name);
+          $input['path'] = $name;
+        }
         $input['user_id'] = 1;
         Post::create($input);
         return redirect('/posts');

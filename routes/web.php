@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +24,18 @@ Route::get('/', function () {
 */
 
 Route::resource('/posts', 'PostsController');
+
+Route::get('/dates', function() {
+
+  echo Carbon::now()->addDays(10)->diffForHumans();
+  echo "<br/>";
+  echo Carbon::now()->subMonths(1)->diffForHumans();
+
+});
+
+use App\User;
+
+Route::get('/getname', function() {
+  $user = User::find(1);
+  echo $user->name;
+});

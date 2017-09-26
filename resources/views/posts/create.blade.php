@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{!! Form::open(['route' => 'posts.store']) !!}
+{!! Form::open(['route' => 'posts.store', 'files' => true]) !!}
   <div class="form-group">
     {!! Form::label('title', 'Title') !!}
     {!! Form::text('title', null, ['class' => 'form-control']) !!}
@@ -9,6 +9,9 @@
   <div class="form-group">
     {!! Form::label('content', 'Content') !!}
     {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+  </div>
+  <div class="form-group">
+    {!! Form::file('file', ['class' => 'form-control']) !!}
   </div>
   <div class="form-group">
     @if ($errors->any())
